@@ -1,4 +1,8 @@
+import CategoryContent from '@/components/category/CategoryContent';
 import MobileFilter from '@/components/category/MobileFilter';
+import SideBarFilter from '@/components/category/SideBarFilter';
+import Loading from '@/components/shared/Loading';
+import { Suspense } from 'react';
 
 const CategoryPage = () => {
   return (
@@ -6,7 +10,13 @@ const CategoryPage = () => {
       <h2 className='font-extrabold text-display-xs lg:text-display-md'>
         All Restaurant
       </h2>
-      <MobileFilter />
+      <Suspense fallback={<Loading />}>
+        <div className='flex flex-col lg:flex-row gap-10'>
+          <MobileFilter />
+          <SideBarFilter />
+          <CategoryContent />
+        </div>
+      </Suspense>
     </div>
   );
 };

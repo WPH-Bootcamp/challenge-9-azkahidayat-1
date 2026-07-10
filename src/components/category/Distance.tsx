@@ -4,12 +4,12 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 type DistanceProps = {
-  onSelect: () => void;
+  onSelect?: () => void;
 };
 
 const Distance = ({ onSelect }: DistanceProps) => {
   const searchParams = useSearchParams();
-  const distance = searchParams.get('page') ?? 'nearby';
+  const distance = searchParams.get('filter') ?? '';
   const router = useRouter();
 
   const distances = [
@@ -25,9 +25,13 @@ const Distance = ({ onSelect }: DistanceProps) => {
       <RadioGroup
         value={distance}
         onValueChange={(value) => {
-          onSelect();
+          onSelect?.();
           setTimeout(() => {
-            router.push(`/category?page=${value}`);
+            const params = new URLSearchParams(searchParams.toString());
+
+            params.set('filter', value);
+
+            router.push(`/category?${params.toString()}`, { scroll: false });
           }, 200);
         }}
       >
@@ -38,7 +42,12 @@ const Distance = ({ onSelect }: DistanceProps) => {
               id={item.value}
               variant='checkbox'
             />
-            <Label htmlFor={item.value}>{item.label}</Label>
+            <Label
+              htmlFor={item.value}
+              className='w-full h-full cursor-pointer'
+            >
+              <p>{item.label}</p>
+            </Label>
           </div>
         ))}
       </RadioGroup>

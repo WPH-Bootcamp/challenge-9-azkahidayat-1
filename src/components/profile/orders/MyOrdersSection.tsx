@@ -5,11 +5,6 @@ import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MyOrderList from './MyOrderList';
 import { EmptyData } from '@/components/shared/EmptyData';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
 
 const MyOrdersSection = () => {
   const [status, setStatus] = useState<TransactionStatus>('done');
@@ -42,7 +37,7 @@ const MyOrdersSection = () => {
       >
         <div className='flex gap-2 lg:gap-3 items-center'>
           <p className='font-bold text-sm lg:text-lg text-black'>Status</p>
-          <div className='overflow-x-auto overflow-y-hidden'>
+          <div className='overflow-x-auto overflow-y-hidden scrollbar-none'>
             <TabsList className='flex gap-2 lg:gap-3'>
               <TabsTrigger value='preparing' variant='red'>
                 Preparing
