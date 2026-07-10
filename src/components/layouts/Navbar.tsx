@@ -100,7 +100,7 @@ const Navbar = () => {
             Sign In
           </Button>
           <Button variant={'secondary'} onClick={handleSignUpClick}>
-            Sing Up
+            Sign Up
           </Button>
         </div>
       )}
